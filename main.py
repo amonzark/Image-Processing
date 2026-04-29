@@ -1,31 +1,48 @@
 import cv2
-from image_utils import load_image, save_image
+from image_utils import display_image, save_image
+from convert_color import convert_image_color_to_grayscale, convert_image_color_to_rgb, convert_image_color_to_hsv
+from image_edit import crop_image, resize_image
 
 gambar = 'images.jpg'
-img = load_image(gambar)
+img = cv2.imread(gambar)
 
 if img is not None:
     print("Displaying original image...")
-    cv2.imshow('Image', img)
+    display_image(img)
     cv2.waitKey(10000)
     save_image('save/output.jpg', img)
 
     print("Displaying converted image to grayscale...")
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    cv2.imshow('Grayscale Image', gray)
+    convert_image_color_to_grayscale(img)
     cv2.waitKey(10000)
-    save_image('save/grayscale.jpg', gray)
 
     print("Displaying converted image to RGB...")
-    rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-    cv2.imshow('RGB Image', rgb)
+    convert_image_color_to_rgb(img)
     cv2.waitKey(10000)
-    save_image('save/rgb.jpg', rgb)
 
     print("Displaying converted image to HSV...")
-    hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-    cv2.imshow('HSV Image', hsv)
+    convert_image_color_to_hsv(img)
     cv2.waitKey(10000)
-    save_image('save/hsv.jpg', hsv)
+
+    #croping image
+    x_start = int(input("Enter x start: "))
+    x_end = int(input("Enter x end: "))
+    y_start = int(input("Enter y start: "))
+    y_end = int(input("Enter y end: "))
+    print("Displaying cropped image with "+f"coordinates: ({x_start}, {y_start}) to ({x_end}, {y_end})...")
+    cropped = crop_image(img, x_start, x_end, y_start, y_end)
+    display_image(cropped)
+    cv2.waitKey(10000)
+    save_image('save/cropped.jpg', cropped)
+
+    #resizing image
+    new_width = int(input("Enter new width: "))
+    new_height = int(input("Enter new height: "))
+    print("Displaying resized image...")
+    resized = resize_image(img, new_width, new_height)
+    display_image(resized)
+    cv2.waitKey(10000)
+    save_image('save/resized.jpg', resized)
+
 
     cv2.destroyAllWindows()

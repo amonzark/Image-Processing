@@ -1,35 +1,37 @@
 import cv2
-from image_utils import load_image, save_image
+from image_utils import display_image, save_image
 
-def convert_image_color_to_grayscale(image_path):
-    image = load_image(image_path)
+def convert_image_color_to_grayscale(image):
     if image is not None:
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-        print(f"Grayscale shape: {gray.shape}")  # (height, width) — no channel!
-        #location = 'save/grayscale.jpg'
-        #save_image(location, gray)
-    else :
+        print(f"Grayscale shape: {gray.shape}")
+        display_image(gray)
+        save_image('save/grayscale.jpg', gray)
+    else:
         print("Failed to load image for grayscale conversion.")
+        return None
 
 # --- Convert to RGB (from BGR) ---
-def convert_image_color_to_rgb(image_path):
-    image = load_image(image_path)
+def convert_image_color_to_rgb(image):
     if image is not None:
         rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         print(f"RGB shape: {rgb.shape}")
-        #location = 'save/rgb.jpg'
-        #save_image(location, rgb)
+        display_image(rgb)
+        save_image('save/rgb.jpg', rgb)
+        return rgb
     else:
         print("Failed to load image for RGB conversion.")
+        return None
 
 # --- Convert to HSV ---
-# H = Hue (color), S = Saturation, V = Value (brightness)
-def convert_image_color_to_hsv(image_path):
-    image = load_image(image_path)
+def convert_image_color_to_hsv(image):
     if image is not None:
         hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
         print(f"HSV shape: {hsv.shape}")
-        #location = 'save/hsv.jpg'
-        #save_image(location, hsv)
+        display_image(hsv)
+        save_image('save/hsv.jpg', hsv)
+        return hsv
     else:
         print("Failed to load image for HSV conversion.")
+        return None
+
