@@ -2,12 +2,13 @@ import cv2
 from image_utils import display_image, save_image
 from convert_color import convert_image_color_to_grayscale, convert_image_color_to_rgb, convert_image_color_to_hsv
 from image_edit import crop_image, resize_image
+from blurring import gaussian_blur, median_blur, bilateral_blur, average_blur
 
 gambar = 'images.jpg'
 img = cv2.imread(gambar)
 
 if img is not None:
-    print("Displaying original image...")
+    """print("Displaying original image...")
     display_image(img)
     cv2.waitKey(10000)
     save_image('save/output.jpg', img)
@@ -22,10 +23,10 @@ if img is not None:
 
     print("Displaying converted image to HSV...")
     convert_image_color_to_hsv(img)
-    cv2.waitKey(10000)
+    cv2.waitKey(10000)"""
 
     #croping image
-    x_start = int(input("Enter x start: "))
+    """x_start = int(input("Enter x start: "))
     x_end = int(input("Enter x end: "))
     y_start = int(input("Enter y start: "))
     y_end = int(input("Enter y end: "))
@@ -33,16 +34,36 @@ if img is not None:
     cropped = crop_image(img, x_start, x_end, y_start, y_end)
     display_image(cropped)
     cv2.waitKey(10000)
-    save_image('save/cropped.jpg', cropped)
+    save_image('save/cropped.jpg', cropped)"""
 
     #resizing image
-    new_width = int(input("Enter new width: "))
+    """new_width = int(input("Enter new width: "))
     new_height = int(input("Enter new height: "))
     print("Displaying resized image...")
     resized = resize_image(img, new_width, new_height)
     display_image(resized)
     cv2.waitKey(10000)
-    save_image('save/resized.jpg', resized)
+    save_image('save/resized.jpg', resized)"""
 
+    #gaussian blurring
+    """kernel_size = int(input("Enter kernel size for blurring (odd number): "))
+    print("Displaying Gaussian blurred image...")
+    gaussian_blur(img, kernel_size)
+    cv2.waitKey(10000)"""
 
+    #median blurring
+    """kernel_size = int(input("Enter kernel size for blurring (odd number): "))
+    print("Displaying Median blurred image...")
+    median_blur(img, kernel_size)
+    cv2.waitKey(10000)"""
+
+    #bilateral blurring
+    diameter = int(input("Enter diameter for bilateral blurring: "))
+    sigma_color = int(input("Enter sigma color for bilateral blurring: "))
+    sigma_space = int(input("Enter sigma space for bilateral blurring: "))
+    bilateral_blur(img, diameter, sigma_color, sigma_space)
+    cv2.waitKey(10000)
+    
     cv2.destroyAllWindows()
+else:
+    print("Failed to load image.")
