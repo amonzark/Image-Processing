@@ -7,6 +7,7 @@ def convert_image_color_to_grayscale(image):
         print(f"Grayscale shape: {gray.shape}")
         display_image(gray)
         save_image('save/grayscale.jpg', gray)
+        return gray 
     else:
         print("Failed to load image for grayscale conversion.")
         return None

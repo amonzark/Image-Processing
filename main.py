@@ -3,6 +3,7 @@ from image_utils import display_image, save_image
 from convert_color import convert_image_color_to_grayscale, convert_image_color_to_rgb, convert_image_color_to_hsv
 from image_edit import crop_image, resize_image
 from blurring import gaussian_blur, median_blur, bilateral_blur, average_blur
+from threshold import apply_threshold, apply_threshold_inverse, apply_threshold_otsu, apply_threshold_adaptive, proper_thresholding
 
 gambar = 'images.jpg'
 img = cv2.imread(gambar)
@@ -58,12 +59,37 @@ if img is not None:
     cv2.waitKey(10000)"""
 
     #bilateral blurring
-    diameter = int(input("Enter diameter for bilateral blurring: "))
+    """diameter = int(input("Enter diameter for bilateral blurring: "))
     sigma_color = int(input("Enter sigma color for bilateral blurring: "))
     sigma_space = int(input("Enter sigma space for bilateral blurring: "))
     bilateral_blur(img, diameter, sigma_color, sigma_space)
+    cv2.waitKey(10000)"""
+
+    #thresholding simple for scanning documents
+    """print("Displaying thresholded image...")
+    apply_threshold(img)
+    cv2.waitKey(10000)"""
+
+    #thresholding inverse
+    """print("Displaying thresholded inverse image...")
+    apply_threshold_inverse(img)
+    cv2.waitKey(10000)"""
+
+    #thresholding otsu (automatic thresholding)
+    """print("Displaying thresholded otsu image...")
+    apply_threshold_otsu(img)
+    cv2.waitKey(10000)"""
+
+    #thresholding adaptive
+    """print("Displaying thresholded adaptive image...")
+    apply_threshold_adaptive(img)
+    cv2.waitKey(10000)"""
+
+    #proper thresholding for scanning documents
+    print("Displaying proper thresholding image...")
+    proper_thresholding(img)
     cv2.waitKey(10000)
-    
+
     cv2.destroyAllWindows()
 else:
     print("Failed to load image.")
